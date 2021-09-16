@@ -1,0 +1,24 @@
+name: Python app test w/ GitHub Actions 
+
+# Controls when the workflow will run
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: make install
+      - name: Lint with pylint
+        run: make lint
+      - name: Test w/ pytest
+        run: make test
+      - name: Format w/ black
+        run: make format
+      
